@@ -13,6 +13,11 @@ app.post("/signIn", (req,res)=>{
         message:"ali"
     });
 })
+app.get("/users", (req,res)=>{
+    res.status(200).send(
+        users
+    );
+})
 
 
 app.post("/signup", (req,res)=>{
