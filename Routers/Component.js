@@ -1,3 +1,4 @@
+let components=[{id:1,name:'IC',description:'IC3400'}]
 const express = require('express')
 
 const router = new express.Router()
@@ -5,13 +6,11 @@ const router = new express.Router()
 router.get("/cats", (req, res) => {
     res.send(cats)
 })
-app.get("/items/:id" , (req,res) =>{
+app.get("/components/:id" , (req,res) =>{
     const id =req.params.id;
-    console.log(id)
-     const obj = items.find((item)=>{
+     const obj = components.find((item)=>{
          return item.id==id;
      })
-     console.log(obj)
      if(obj){
          res.status(200).send(obj); 
      }else{
