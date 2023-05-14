@@ -1,3 +1,7 @@
+const users = [{
+    username: "hant",
+    password: "123"
+}]
 const express = require('express')
 
 
@@ -7,9 +11,10 @@ const port = process.env.PORT || 3000
 app.use(express.json())
 
 app.post("/signIn", (req,res)=>{
-    console.log(req.body.username);
-    console.log(req.body.password)
-    res.status(200).send();
+    console.log(req.body);
+    res.status(200).send({
+        message:"ali"
+    });
 })
 
 app.listen(port, () => {
