@@ -1,4 +1,5 @@
 let users = []
+let items=[{id:1,name:'IC',description:'IC3400'}]
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
@@ -43,6 +44,21 @@ app.post("/signup", (req,res)=>{
 
 
 })
+app.get("/items/:id" , (req,res) =>{
+   const id =req.params.id;
+   console.log(id)
+    const obj = items.find((item)=>{
+        return item.id==id;
+    })
+    console.log(obj)
+    if(obj){
+        res.status(200).send(obj); 
+    }else{
+        res.status(400).send() 
+    }
+   
+})
+
 app.listen(port, () => {
     console.log('Server is Running on port: ' + port)
 })
