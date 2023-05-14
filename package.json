@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js",
     "git-a": "git add . && git commit -m 'anas' && git push origin master",
+    "git-h": "git add . && git commit -m 'hussien' && git push origin hussien".
     "git-n": "git add . && git commit -m 'noor' && git push origin noor",
     "git-t":"git add . && git commit -m 'toka' && git push origin toka"
   },
