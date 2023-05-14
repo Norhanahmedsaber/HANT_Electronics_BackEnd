@@ -15,8 +15,12 @@ app.post("/signIn", (req,res)=>{
     res.status(200).send({
         message:"ali"
     });
-})
 
+app.post("/signup", (req,res)=>{
+    console.log(req.body)
+    res.send({Data:"Done"});
+
+})
 app.listen(port, () => {
     console.log('Server is Running on port: ' + port)
 })
