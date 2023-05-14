@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js",
-    "git-a": "git add . && git commit -m 'anas' && git push origin master"
+    "git-a": "git add . && git commit -m 'anas' && git push origin master",
+    "git-n": "git add . && git commit -m 'anas' && git push origin noor"
+
   },
   "keywords": [],
   "author": "",
