@@ -1,7 +1,4 @@
-const users = [{
-    username: "hant",
-    password: "123"
-}]
+let users = []
 const express = require('express')
 
 
@@ -15,9 +12,16 @@ app.post("/signIn", (req,res)=>{
     res.status(200).send({
         message:"ali"
     });
+})
+
 
 app.post("/signup", (req,res)=>{
-    console.log(req.body)
+    const user={
+        username:req.body.username,
+        password:req.body.password,
+        email: req.body.email,
+    }
+    users = users.concat(user);
     res.send({Data:"Done"});
 
 })
