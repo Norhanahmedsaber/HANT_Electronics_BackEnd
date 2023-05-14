@@ -1,7 +1,4 @@
-const users = [{
-    username: "hant",
-    password: "123"
-}]
+let users = []
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
@@ -17,6 +14,7 @@ const findUser = (username, password)=> {
     return false;
 }
 app.post("/signIn", (req,res)=>{
+
     const username = req.body.username
     const password = req.body.password
     console.log(req.body)
@@ -25,6 +23,24 @@ app.post("/signIn", (req,res)=>{
     }else {
         res.status(400).send({message: "Username or Password Incorrect"})
     }
+
+})
+app.get("/users", (req,res)=>{
+    res.status(200).send(
+        users
+    );
+})
+
+
+app.post("/signup", (req,res)=>{
+    const user={
+        username:req.body.username,
+        password:req.body.password,
+        email: req.body.email,
+    }
+    users = users.concat(user);
+    res.send({Data:"Done"});
+
 
 })
 app.listen(port, () => {
