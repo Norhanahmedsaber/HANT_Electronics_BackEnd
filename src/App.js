@@ -6,8 +6,10 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 
-app.get("/", (req,res)=>{
-    res.send("asd")
+app.post("/signIn", (req,res)=>{
+    console.log(req.body.username);
+    console.log(req.body.password)
+    res.status(200).send();
 })
 
 app.listen(port, () => {
