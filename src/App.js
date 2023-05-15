@@ -13,6 +13,8 @@ app.use(listRouter);
 app.use(componentRouter);
 app.use(phonesRouters);
 app.use(storesRouter);
+app.use(categoryRouter)
+app.use(roleRouter)
 
 app.listen(port, () => {
   console.log("Server is Running on port: " + port);
