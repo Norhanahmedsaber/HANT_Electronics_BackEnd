@@ -4,6 +4,8 @@ const listRouter = require("../Routers/List");
 const componentRouter = require("../Routers/Component");
 const phonesRouters = require("../Routers/Phones");
 const storesRouter = require("../Routers/Store");
+const categoryRouter = require("../Routers/categories")
+const roleRouter = require("../Routers/Role")
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
