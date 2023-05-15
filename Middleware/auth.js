@@ -5,7 +5,6 @@ const auth = async (req , res , next )=>
 {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
-        console.log(token)
         const decoded = jwt.verify(token,'HANT')
         const user = await User.getById(decoded.id)
         if(!user) throw new Error()

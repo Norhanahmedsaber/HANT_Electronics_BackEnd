@@ -6,6 +6,7 @@ const phonesRouters = require("../Routers/Phones");
 const storesRouter = require("../Routers/Store");
 const roleRouter = require("../Routers/Role")
 const categoryRouter = require("../Routers/categories")
+const itemRouter = require("../Routers/Item")
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(phonesRouters);
 app.use(storesRouter);
 app.use(categoryRouter)
 app.use(roleRouter)
+app.use(itemRouter)
 
 app.listen(port, () => {
   console.log("Server is Running on port: " + port);

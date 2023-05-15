@@ -10,7 +10,6 @@ const create = async (user) => {
 
     await pool.query('INSERT INTO "users" (email,password,username,roleid) VALUES ($1,$2,$3,$4)', [user.email, passwordHash, user.username, user.roleid])
 
-    return await getByEmail(user.email);
 }
 
 const login = async (username, password) => {
