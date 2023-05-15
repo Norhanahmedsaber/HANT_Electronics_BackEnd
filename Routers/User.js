@@ -1,4 +1,3 @@
-let users = []
 const express = require('express')
 const User = require("../Models/User")
 const router = new express.Router()
