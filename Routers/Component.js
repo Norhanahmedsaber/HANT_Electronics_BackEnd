@@ -6,7 +6,7 @@ const router = new express.Router()
 router.get("/cats", (req, res) => {
     res.send(cats)
 })
-app.get("/components/:id" , (req,res) =>{
+router.get("/components/:id" , (req,res) =>{
     const id =req.params.id;
      const obj = components.find((item)=>{
          return item.id==id;
