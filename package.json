@@ -9,12 +9,16 @@
     "git-a": "git add . && git commit -m 'anas' && git push origin master",
     "git-h": "git add . && git commit -m 'hussien' && git push origin hussien",
     "git-n": "git add . && git commit -m 'noor' && git push origin noor",
-    "git-t":"git add . && git commit -m 'toka' && git push origin toka"
+    "git-t": "git add . && git commit -m 'toka' && git push origin toka"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }
