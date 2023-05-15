@@ -1,5 +1,5 @@
 1-create table roles (roleid serial PRIMARY KEY , rolename VARCHAR );
-2-create table users (userid serial PRIMARY KEY ,roleid VARCHAR ,  username VARCHAR , password VARCHAR , FOREIGN KEY(userid) REFERENCES roles (roleid));
+2-create table users (userid serial PRIMARY KEY ,roleid VARCHAR ,  username VARCHAR , password VARCHAR , FOREIGN KEY(roleid) REFERENCES roles (roleid));
 3-CREATE TABLE categories ( ID SERIAL PRIMARY KEY , name VARCHAR(30));
 4-create table stores(id serial primary key,name varchar(255),location varchar(255),img_url varchar(255));
 5-create table phones(id serial primary key ,number varchar(255),store_id int references stores(id));
@@ -14,3 +14,4 @@ user_id INT REFERENCES users(userid),
 list_id INT REFERENCES lists(id));
 11-CREATE TABLE items (id SERIAL PRIMARY KEY, quantity INT, list_id INT REFERENCES lists(id),
 component_id INT REFERENCES components(id));
+12- ALTER TABLE items add column note VARCHAR(255);

@@ -19,12 +19,12 @@ router.post("/signin", async (req,res)=>{
 })
 router.post("/signup", async(req,res)=>{
     const user = req.body;
-   await User.create(user)
+    await User.create(user)
     res.send({Data:"Done"});
 
 
 })
-router.get("/users/:id",auth,async (req,res)=>{
+router.get("/users/:id", auth, async (req,res)=>{
     const id = req.params.id
     const user = await User.getById(id)
     res.send(user)
