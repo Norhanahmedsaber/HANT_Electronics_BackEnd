@@ -7,3 +7,10 @@
 7-CREATE TABLE components (id SERIAL PRIMARY KEY, name VARCHAR(50),
 description VARCHAR(255), datasheet_url VARCHAR(255),
 image_url VARCHAR(255), catId int REFERENCES categories(id));
+
+9-CREATE TABLE lists (id SERIAL PRIMARY KEY, name VARCHAR(50), note VARCHAR(255));
+10-CREATE TABLE users_lists (id SERIAL PRIMARY KEY, fav VARCHAR(1) default 'N',
+user_id INT REFERENCES users(userid),
+list_id INT REFERENCES lists(id));
+11-CREATE TABLE items (id SERIAL PRIMARY KEY, quantity INT, list_id INT REFERENCES lists(id),
+component_id INT REFERENCES components(id));
