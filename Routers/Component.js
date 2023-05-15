@@ -1,4 +1,5 @@
 let components=[{id:1,name:'IC',description:'IC3400'}]
+let cats = []
 const express = require('express')
 const Component = require("../Models/Component")
 const router = new express.Router()
