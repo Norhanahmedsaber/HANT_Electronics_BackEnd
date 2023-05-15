@@ -7,3 +7,4 @@
 7-CREATE TABLE components (id SERIAL PRIMARY KEY, name VARCHAR(50),
 description VARCHAR(255), datasheet_url VARCHAR(255),
 image_url VARCHAR(255), catId int REFERENCES categories(id));
+8-alter table users add column email VARCHAR(255);
