@@ -1,4 +1,10 @@
 let users = []
+const getListFromDatabase = ()=> {
+    return [{
+        id: 1,
+        name: "list 1"
+    }]
+}
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
@@ -14,7 +20,6 @@ const findUser = (username, password)=> {
     return false;
 }
 app.post("/signIn", (req,res)=>{
-
     const username = req.body.username
     const password = req.body.password
     console.log(req.body)
@@ -25,6 +30,11 @@ app.post("/signIn", (req,res)=>{
     }
 
 })
+app.get("/lists",(req,res)=>{
+    const lists =  getListFromDatabase();
+    res.send(lists);
+})
+
 app.get("/users", (req,res)=>{
     res.status(200).send(
         users
