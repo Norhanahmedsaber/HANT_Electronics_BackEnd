@@ -1,6 +1,6 @@
 let components=[{id:1,name:'IC',description:'IC3400'}]
 const express = require('express')
-
+const Component = require("../Models/Component")
 const router = new express.Router()
 
 router.get("/cats", (req, res) => {
@@ -18,5 +18,7 @@ router.get("/components/:id" , (req,res) =>{
      }
     
  })
-
+router.get("/components", async(req,res)=>{
+    res.send(await Component.getAll());
+})
 module.exports = router

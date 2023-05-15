@@ -1,6 +1,5 @@
 const pool = require('../DB/Postgres');
 const bcrypt = require('bcrypt');
-
 const add = async (user) => {
 
     //Hashing user password
