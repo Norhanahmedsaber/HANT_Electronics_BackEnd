@@ -26,7 +26,7 @@ router.post("/signin", (req,res)=>{
     }
 
 })
-app.post("/signup", (req,res)=>{
+router.post("/signup", (req,res)=>{
     const user={
         username:req.body.username,
         password:req.body.password,
