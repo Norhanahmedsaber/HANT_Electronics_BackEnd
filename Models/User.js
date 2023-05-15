@@ -1,5 +1,6 @@
 const pool = require('../DB/Postgres');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken")
 
 const create = async (user) => {
 
@@ -9,7 +10,6 @@ const create = async (user) => {
 
     await pool.query('INSERT INTO "users" (email,password,username,roleid) VALUES ($1,$2,$3,$4)', [user.email, passwordHash, user.username, user.roleid])
 
-    return await getByEmail(user.email);
 }
 
 const login = async (username, password) => {
@@ -28,9 +28,10 @@ const login = async (username, password) => {
 
     const isValid = await bcrypt.compare(password, user.password)
 
-    if(isValid) return user
-
-    return null
+    if(!isValid) return null
+    const token = jwt.sign({id : user.userid},'HANT')
+    user.token=token
+    return user
 }
 
 const getById = async (id) => {
