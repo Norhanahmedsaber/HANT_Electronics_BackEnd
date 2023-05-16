@@ -27,6 +27,6 @@ router.put("/item/:id", async(req,res) => {
 router.delete("/item/:id", async(req,res) => {
     const itemId = req.params.id
     await Item.removeItemFromList(itemId)
-    res.send("Done")
+    res.send({message:"Done"})
 })
 module.exports = router
