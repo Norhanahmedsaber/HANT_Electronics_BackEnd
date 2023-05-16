@@ -26,6 +26,12 @@ router.get("/list", auth ,async(req, res) =>{
     const lists = await List.getUsersList(user.userid)
     res.send(lists)
 })
+router.get("/list/search/:search", auth, async(req,res) => {
+    const user = req.user
+    const search = req.params.search
+    const lists = await List.search(user.userid, search)
+    res.send(lists)
+})
 router.get("/list/:id", auth, async(req,res)=> {
     const user = req.user
     const id = req.params.id

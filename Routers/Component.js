@@ -20,6 +20,10 @@ router.get("/component/:id", async(req,res)=>{
     const component = await Component.getByID(id)
     res.send(component);
 })
+router.get("/component/search/:search", async(req,res)=>{
+    const search = req.params.search
+    res.send(await Component.search(search))
+})
 router.get("/component", async(req,res)=>{
     res.send(await Component.getAll());
 })

@@ -25,6 +25,18 @@ const getUsersList = async(userId) => {
     }
     return lists
 }
+const search = async(userId, search) => {
+    const { rows } = await pool.query('SELECT * FROM users_lists WHERE user_id = $1', [userId]);
+    let lists = []
+    for(let i=0;i<rows.length;i++) {
+        const list = await pool.query('SELECT * FROM lists WHERE id = $1 AND name LIKE $2', [rows[i].list_id, '%'+search+'%']);
+        if(list.rows[0]){
+            list.rows[0].fav = rows[i].fav
+            lists = lists.concat(list.rows[0])
+        }
+    }
+    return lists
+}
 const getById = async(listId, userId) => {
     const { rows, rowCount } = await pool.query('SELECT * FROM users_lists WHERE user_id = $1 AND list_id=$2', [userId, listId]);
     if(rowCount > 0) {
@@ -59,5 +71,6 @@ module.exports = {
     getById,
     setAsFav,
     removeFromFav,
-    getFavs
+    getFavs,
+    search
 }

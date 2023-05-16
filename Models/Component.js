@@ -12,6 +12,11 @@ const getAll=async()=>{
     const {rows}=await pool.query('SELECT * FROM "components"')
     return rows
 }
+const search = async (search) => {
+    const {rows} = await pool.query('SELECT * FROM components WHERE name LIKE $1', ['%'+search+'%'])
+    console.log(rows)
+    return rows
+}
 const getByCatId = async (catid) => {
    const {rows}= await pool.query('SELECT * FROM "components" WHERE catid = $1', [catid])
    return rows
@@ -33,6 +38,7 @@ module.exports = {
     getByCatId,
     deleteById,
     deleteAll,
-    update 
+    update,
+    search
 
 }
