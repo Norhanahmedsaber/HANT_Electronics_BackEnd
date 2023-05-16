@@ -6,6 +6,7 @@ router.post("/list", auth, async (req, res) => {
     const user = req.user
     const id = await List.create(user.userid)
     res.send({id: id})
+
 })
 
 router.delete("/list/admin/:id", async (req,res)=>{

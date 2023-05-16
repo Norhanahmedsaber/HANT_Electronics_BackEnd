@@ -15,3 +15,4 @@ list_id INT REFERENCES lists(id));
 11-CREATE TABLE items (id SERIAL PRIMARY KEY, quantity INT, list_id INT REFERENCES lists(id),
 component_id INT REFERENCES components(id));
 12- ALTER TABLE items add column note VARCHAR(255);
+13- ALTER TABLE items add column name VARCHAR(50);
