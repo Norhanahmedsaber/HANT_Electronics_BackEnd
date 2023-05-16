@@ -1,9 +1,10 @@
 const pool = require("../DB/Postgres")
 
-const create = async (list, userId) => {
-    const { rows, rowCount } = await pool.query('INSERT INTO "lists" (name,note) VALUES ($1,$2) RETURNING id',[list.name, list.note]);
+const create = async (userId) => {
+    const { rows, rowCount } = await pool.query('INSERT INTO "lists" (name,note) VALUES ($1,$2) RETURNING id',["UNTITLED", ""]);
     if(rowCount > 0) {
         await pool.query('INSERT INTO "users_lists" (user_id, list_id) VALUES ($1,$2)',[userId, rows[0].id])
+        return rows[0].id;
     }
 }
 const deleteByIdAdmin = async (id) => {
@@ -34,7 +35,8 @@ const getById = async(listId, userId) => {
 
 }
 const setAsFav = async(listId, userId) => {
-    const { rows, rowCount } = await pool.query('UPDATE users_lists SET fav = $1 WHERE user_id = $2 AND list_id = $3', ['Y',userId, listId]);
+    const { rows, rowCount } = await pool.query('UPDATE users_lists SET fav = $1 WHERE user_id = $2 AND list_id = $3 RETURNING fav', ['Y',userId, listId]);
+    return rows.fav;
 }
 const removeFromFav = async(listId, userId) => {
     const { rows, rowCount } = await pool.query('UPDATE users_lists SET fav = $1 WHERE user_id = $2 AND list_id = $3', ['N',userId, listId]);

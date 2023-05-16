@@ -4,9 +4,8 @@ const auth = require("../Middleware/auth")
 const router = new express.Router()
 router.post("/list", auth, async (req, res) => {
     const user = req.user
-    const list = req.body
-    await List.create(list, user.userid)
-    res.send(list)
+    const id = await List.create(user.userid)
+    res.send({id: id})
 })
 
 router.delete("/list/admin/:id", async (req,res)=>{
@@ -19,7 +18,7 @@ router.delete("/list/user/:id", auth, async (req,res)=>{
     const user = req.user;
     const id = req.params.id
     await List.deleteByIdUser(id, user.userid)
-    res.send();
+    res.send({message: "deleted"});
 })
 router.get("/list", auth ,async(req, res) =>{
     const user = req.user
@@ -36,7 +35,7 @@ router.put("/list/setfav/:id", auth, async(req, res)=>{
     const id = req.params.id
     const user = req.user
     const lists = await List.setAsFav(id, user.userid)
-    res.send();
+    res.send({message:"Added to fav"});
 })
 router.put("/list/clrfav/:id", auth, async(req, res)=>{
     const id = req.params.id
