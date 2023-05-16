@@ -4,9 +4,8 @@ const auth = require("../Middleware/auth")
 const router = new express.Router()
 router.post("/list", auth, async (req, res) => {
     const user = req.user
-    const list = req.body
-    await List.create(list, user.userid)
-    res.send(list)
+    await List.create(user.userid)
+    res.send()
 })
 
 router.delete("/list/admin/:id", async (req,res)=>{

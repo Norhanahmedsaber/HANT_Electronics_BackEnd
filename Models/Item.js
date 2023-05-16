@@ -4,7 +4,8 @@ const getByListId = async (listId) => {
     return rows
 }
 const addItemToList = async(listId, itemId, data) => {
-    await pool.query('INSERT INTO items (quantity, note, list_id, component_id) VALUES ($1, $2, $3, $4)', [data.quantity, data.note, listId, itemId])
+
+    await pool.query('INSERT INTO items (quantity, note, list_id, component_id, name) VALUES ($1, $2, $3, $4, $5)', [data.quantity, data.note, listId, itemId, data.name])
 }
 const removeItemFromList = async(itemId) => {
     await pool.query('DELETE FROM items WHERE id = $1', [itemId])
