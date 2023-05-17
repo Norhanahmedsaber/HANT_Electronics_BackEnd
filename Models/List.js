@@ -42,7 +42,7 @@ const getById = async(listId, userId) => {
     if(rowCount > 0) {
         const list = await pool.query('SELECT * FROM lists WHERE id = $1', [rows[0].list_id]);
         list.rows[0].fav = rows[0].fav
-        return list.rows
+        return list.rows[0]
     }
 
 }
@@ -63,6 +63,12 @@ const getFavs = async (userId) => {
     }
     return lists
 }
+const update = async(id, data) => {
+    const {rows, rowCount} = await pool.query('SELECT * FROM users_lists WHERE id = $1', [id])
+    if(rowCount > 0) {
+        await pool.query('UPDATE lists SET name = $1, note = $2 WHERE id = $3', [data.name, data.note, rows[0].list_id])
+    }
+}
 module.exports = {
     create,
     deleteByIdAdmin,
@@ -72,5 +78,6 @@ module.exports = {
     setAsFav,
     removeFromFav,
     getFavs,
-    search
+    search,
+    update
 }

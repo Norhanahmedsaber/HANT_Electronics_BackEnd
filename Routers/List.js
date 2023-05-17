@@ -38,6 +38,12 @@ router.get("/list/:id", auth, async(req,res)=> {
     const list = await List.getById(id, user.userid)
     res.send(list)
 })
+router.put("/list/:id", async(req,res) => {
+    const id = req.params.id
+    const data = req.body
+    await List.update(id, data)
+    res.send()
+})
 router.put("/list/setfav/:id", auth, async(req, res)=>{
     const id = req.params.id
     const user = req.user
