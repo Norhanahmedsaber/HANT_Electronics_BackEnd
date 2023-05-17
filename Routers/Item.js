@@ -12,11 +12,13 @@ router.get("/item/:listId",async(req, res) => {
 router.post("/item/add/:listId/:itemId",async (req,res) => {
     const listId = req.params.listId
     const itemId = req.params.itemId
-    const data = req.body
     const component = await Component.getByID(itemId)
+    const data = {}
     data.name = component.name
     await Item.addItemToList(listId, itemId, data)
-    res.send()
+    res.send({
+        message: "Added Successfully"
+    })
 })
 router.put("/item/:id", async(req,res) => {
     const itemId = req.params.id
