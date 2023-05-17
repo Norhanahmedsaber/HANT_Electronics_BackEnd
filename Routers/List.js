@@ -38,17 +38,17 @@ router.get("/list/:id", auth, async(req,res)=> {
     const list = await List.getById(id, user.userid)
     res.send(list)
 })
+router.put("/list/:id", async(req,res) => {
+    const id = req.params.id
+    const data = req.body
+    await List.update(id, data)
+    res.send()
+})
 router.put("/list/setfav/:id", auth, async(req, res)=>{
     const id = req.params.id
     const user = req.user
-    const lists = await List.setAsFav(id, user.userid)
-    res.send({message:"Added to fav"});
-})
-router.put("/list/clrfav/:id", auth, async(req, res)=>{
-    const id = req.params.id
-    const user = req.user
-    const lists = await List.removeFromFav(id, user.userid)
-    res.send()
+    const lists = await List.toggleFav(id, user.userid)
+    res.send({message:"toggled fav"});
 })
 router.get("/list/get/favs", auth, async(req, res)=>{
     const user = req.user
