@@ -46,12 +46,9 @@ const getById = async(listId, userId) => {
     }
 
 }
-const setAsFav = async(listId, userId) => {
-    const { rows, rowCount } = await pool.query('UPDATE users_lists SET fav = $1 WHERE user_id = $2 AND list_id = $3 RETURNING fav', ['Y',userId, listId]);
+const toggleFav = async(listId, userId) => {
+    const { rows, rowCount } = await pool.query( 'UPDATE users_lists SET fav = CASE WHEN fav = $1 THEN $2 ELSE $1 END WHERE user_id = $3 AND list_id = $4 RETURNING fav', ['Y','N',userId, listId]);
     return rows.fav;
-}
-const removeFromFav = async(listId, userId) => {
-    const { rows, rowCount } = await pool.query('UPDATE users_lists SET fav = $1 WHERE user_id = $2 AND list_id = $3', ['N',userId, listId]);
 }
 const getFavs = async (userId) => {
     const { rows } = await pool.query('SELECT * FROM users_lists WHERE user_id = $1 AND fav = $2', [userId, 'Y']);
@@ -69,8 +66,7 @@ module.exports = {
     deleteByIdUser,
     getUsersList,
     getById,
-    setAsFav,
-    removeFromFav,
+    toggleFav,
     getFavs,
     search
 }
