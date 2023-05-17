@@ -17,6 +17,7 @@ router.post("/item/add/:listId/:itemId",async (req,res) => {
     data.name = component.name
     await Item.addItemToList(listId, itemId, data)
     res.send()
+    
 })
 router.put("/item/:id", async(req,res) => {
     const itemId = req.params.id
