@@ -16,6 +16,7 @@ router.post("/item/add/:listId/:itemId",async (req,res) => {
     const data = {}
     data.name = component.name
     await Item.addItemToList(listId, itemId, data)
+
     res.send({
         message: "Added Successfully"
     })
