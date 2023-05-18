@@ -9,10 +9,9 @@ description VARCHAR(255), datasheet_url VARCHAR(255),
 image_url VARCHAR(255), catId int REFERENCES categories(id));
 8-alter table users add column email VARCHAR(255);
 9-CREATE TABLE lists (id SERIAL PRIMARY KEY, name VARCHAR(50), note VARCHAR(255));
-10-CREATE TABLE users_lists (id SERIAL PRIMARY KEY, fav VARCHAR(1) default 'N',
+10-CREATE TABLE users_lists (id SERIAL PRIMARY KEY, fav VARCHAR(1) default 'N', name VARCHAR(50), note VARCHAR(255),
 user_id INT REFERENCES users(userid),
-list_id INT REFERENCES lists(id));
-11-CREATE TABLE items (id SERIAL PRIMARY KEY, quantity INT, list_id INT REFERENCES lists(id),
-component_id INT REFERENCES components(id));
+list_id INT NULL REFERENCES lists(id));
+11-CREATE TABLE items (id SERIAL PRIMARY KEY, quantity INT, list_id INT REFERENCES users_lists(id), component_id INT REFERENCES components(id));
 12- ALTER TABLE items add column note VARCHAR(255);
 13- ALTER TABLE items add column name VARCHAR(50);

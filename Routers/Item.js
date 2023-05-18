@@ -10,13 +10,11 @@ router.get("/item/:listId",async(req, res) => {
     res.send(items);
 })
 router.post("/item/add/:listId/:itemId",async (req,res) => {
-    const listId = req.params.listId
-    const itemId = req.params.itemId
-    const component = await Component.getByID(itemId)
-    const data = {}
-    data.name = component.name
-    await Item.addItemToList(listId, itemId, data)
-
+    const listId=req.params.listId
+    const itemId=req.params.itemId
+    const component=await Component.getByID(itemId)
+    await Item.addItemToList(listId, itemId, component.name)
+ 
     res.send({
         message: "Added Successfully"
     })
@@ -25,7 +23,7 @@ router.put("/item/:id", async(req,res) => {
     const itemId = req.params.id
     const data = req.body
     await Item.update(itemId, data)
-    res.send("aasd")
+    res.send({message:"updated"})
 })
 router.delete("/item/:id", async(req,res) => {
     const itemId = req.params.id

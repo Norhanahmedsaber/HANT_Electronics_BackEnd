@@ -18,7 +18,7 @@ const addGuest = async () => {
     password: "123",
     username: "guest",
     email: "guest",
-    roleid: "1",
+    roleid: 1,
   };
   await create(user);
   const token = jwt.sign({ id: user.userid }, "HANT");
