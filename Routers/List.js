@@ -48,9 +48,9 @@ router.get("/circuit/search/:search", auth ,async(req, res) =>{
 // Lists
 router.post("/list", auth, async (req, res) => {
     const user = req.user
-    await List.create(user.userid)
+    const id = await List.create(user.userid)
     res.send({
-        message: "created"
+        id
     })
 })
 router.delete("/list/:id", async (req,res)=>{

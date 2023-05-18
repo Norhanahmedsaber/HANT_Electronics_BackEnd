@@ -20,6 +20,25 @@ app.use(categoryRouter)
 app.use(roleRouter)
 app.use(itemRouter)
 
+
+app.post("/scrap",async(req,res)=>{
+  const search = req.body.search
+  console.log(req.body)
+  data = await scrap(search)
+  res.send(data)
+})
+const scrap = async (search)=> {
+  
+  const response = await fetch("http://localhost:8080/searchdata", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      component:search
+    }),
+  })
+  const result = await response.json()
+  return result
+}
 app.listen(port, () => {
   console.log("Server is Running on port: " + port);
 });

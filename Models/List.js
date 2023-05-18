@@ -35,6 +35,8 @@ const searchCircuits = async(search) => {
 
 const create = async (userId) => {
     const { rows, rowCount } = await pool.query('INSERT INTO "lists" (name,note) VALUES ($1,$2) RETURNING id',["Untitled", ""]);
+
+    console.log(rows[0])
     if(rowCount > 0) {
         await pool.query('INSERT INTO "users_lists" (user_id, list_id, name, note) VALUES ($1,$2,$3,$4)',[userId, rows[0].id, "Untitled",""])
         return rows[0].id;
