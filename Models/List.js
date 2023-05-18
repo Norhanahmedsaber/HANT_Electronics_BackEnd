@@ -8,6 +8,7 @@ const createCircuit = async(userId, data) => {
 }
 
 const deleteCircuit = async (circuitId) => {
+    await pool.query('DELETE FROM items WHERE user_list_id = $1', [circuitId])
     const {rows, rowCount} = await pool.query('DELETE FROM "users_lists" WHERE id = $1 RETURNING list_id',[circuitId])
     if(rowCount > 0) {
         await pool.query('DELETE FROM lists WHERE id = $1', [rows[0].list_id])
@@ -25,8 +26,15 @@ const getById = async (id) => {
         return rows2[0]
 }
 const getAllCircuits = async() => {
-    const {rows} = await pool.query('SELECT * FROM lists WHERE circuit = $1', ["Y"])
-    return rows;
+    const {rows, rowCount} = await pool.query('SELECT id FROM lists WHERE circuit = $1', ["Y"])
+    if(rowCount > 0) {
+        let lists = []
+        for(let i=0;i<rows.length;i++){
+            const {rows:rows1} = await pool.query('SELECT * FROM users_lists WHERE list_id = $1', [rows[i].id])
+            lists = lists.concat(rows1[0])
+        }
+        return lists;
+    }
 }
 const searchCircuits = async(search) => {
     const {rows} = await pool.query('SELECT * FROM lists WHERE circuit = $2 AND name LIKE $1',[`%${search}%`, "Y"])
@@ -38,11 +46,12 @@ const create = async (userId) => {
 
     console.log(rows[0])
     if(rowCount > 0) {
-        await pool.query('INSERT INTO "users_lists" (user_id, list_id, name, note) VALUES ($1,$2,$3,$4)',[userId, rows[0].id, "Untitled",""])
-        return rows[0].id;
+        const {rows:ids} = await pool.query('INSERT INTO "users_lists" (user_id, list_id, name, note) VALUES ($1,$2,$3,$4) RETURNING id',[userId, rows[0].id, "Untitled",""])
+        return ids[0].id;
     }
 }
 const deleteById = async (id) => {
+    await pool.query('DELETE FROM items WHERE user_list_id = $1', [id])
     await pool.query('DELETE FROM "users_lists" WHERE id = $1', [id])
 }
 const update = async(id, data) => {

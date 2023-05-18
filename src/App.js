@@ -23,7 +23,6 @@ app.use(itemRouter)
 
 app.post("/scrap",async(req,res)=>{
   const search = req.body.search
-  console.log(req.body)
   data = await scrap(search)
   res.send(data)
 })

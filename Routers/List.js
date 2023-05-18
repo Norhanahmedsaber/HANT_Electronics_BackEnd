@@ -7,7 +7,7 @@ const router = new express.Router()
 router.post("/circuit", auth, async (req, res) => {
     const user = req.user
     if(user.roleid !== 2) {
-        res.status(401).send("Unauthorized")
+        return res.status(401).send("Unauthorized")
     }
     const data = req.body
     await List.createCircuit(user.userid,data)
@@ -30,7 +30,7 @@ router.put("/circuit/:id", async(req,res) => {
         }
     )
 })
-router.get("/circuit", auth ,async(req, res) =>{
+router.get("/circuit" ,async(req, res) =>{
     const lists = await List.getAllCircuits()
     res.send(lists)
 })
