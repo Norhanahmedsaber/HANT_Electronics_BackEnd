@@ -1,7 +1,7 @@
 1-create table roles (roleid serial PRIMARY KEY , rolename VARCHAR );
 2-create table users (userid serial PRIMARY KEY , roleid INT, email VARCHAR(255), username VARCHAR , password VARCHAR , FOREIGN KEY(roleid) REFERENCES roles (roleid));
 3-CREATE TABLE categories ( ID SERIAL PRIMARY KEY , name VARCHAR(30));
-4-create table stores(id serial primary key,name varchar(255) website VARCHAR(255),location varchar(255),img_url varchar(255));
+4-create table stores(id serial primary key,name varchar(255) ,website VARCHAR(255),location varchar(255),img_url varchar(255));
 5-create table phones(id serial primary key ,number varchar(255),store_id int references stores(id));
 6-CREATE TABLE components (id SERIAL PRIMARY KEY, name VARCHAR(50),
 description VARCHAR(255), datasheet_url VARCHAR(255),
@@ -11,3 +11,5 @@ image_url VARCHAR(255), catId int REFERENCES categories(id));
 user_id INT REFERENCES users(userid),
 list_id INT NULL REFERENCES lists(id));
 9-CREATE TABLE items (id SERIAL PRIMARY KEY, quantity INT, name VARCHAR(255), user_list_id INT REFERENCES users_lists(id), component_id INT REFERENCES components(id));
+10-insert into roles (rolename) values('user');
+11-insert into roles (rolename) values('Admin');
