@@ -11,17 +11,33 @@ router.post("/signin", async (req, res) => {
   if (user) {
     res.status(200).send(user);
   } else {
-    res.status(400).send({ message: "Username or Password Incorrect" });
+    res.status(400).send({ 
+      message: "Username or Password Incorrect"
+    });
   }
 });
+
+
 router.post("/signup", async (req, res) => {
   const user = req.body;
+  if(!user.username || !user.email || !user.password){
+    return res.send({ message: "One or More Fields are Empty" });
+  }
   await User.create(user);
-  res.send({ Data: "Done" });
+  res.send({
+    message: "Done"
+  });
 });
+
+
 router.get("/users/:id", auth, async (req, res) => {
   const id = req.params.id;
   const user = await User.getById(id);
+  if(!user) {
+    return res.send({
+      message: "User not Found!"
+    })
+  }
   res.send(user);
 });
 
@@ -32,13 +48,14 @@ router.get("/users", async (req, res) => {
 
 router.delete("/users/:id", async (req, res) => {
   const id = req.params.id;
+  const user = await User.getById(id);
+  if(!user) {
+    return res.send({
+      message: "User not Found!"
+    })
+  }
   await User.deletee(id);
   res.send("Deleted");
-});
-router.get("/i", auth, (req, res) => {
-  const user = req.user;
-  console.log(user);
-  res.send(user);
 });
 
 router.post("/users/guest", async (req, res) => {
