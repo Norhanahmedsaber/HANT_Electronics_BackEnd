@@ -1,0 +1,101 @@
+INSERT INTO "categories" (name) VALUES ($1)
+SELECT * FROM "categories" WHERE id = $1
+SELECT *FROM "categories"
+DELETE FROM "categories" WHERE id = $1
+DELETE FROM "categories"
+UPDATE categories SET name = $1 WHERE id = $2
+
+INSERT INTO "components" (name,description,catid,datasheet_url) VALUES ($1,$2,$3,$4)
+SELECT * FROM "components" WHERE id = $1
+SELECT * FROM "components" ORDER BY name
+SELECT * FROM components WHERE name LIKE $1 ORDER BY name
+SELECT * FROM "components" WHERE catid = $1 ORDER BY name
+DELETE FROM "components" WHERE id = $1
+DELETE FROM "components
+UPDATE components SET name = $1 , description = $2, catid = $3 WHERE id = $4
+
+SELECT * FROM "delivery" WHERE id = $1
+DELETE FROM "delivery" WHERE id = $1
+INSERT INTO "delivery" (name,age,salary,store_id) VALUES($1,$2)
+SELECT * FROM "delivery" WHERE store_id = %1
+SELECT count(*) FROM "delivery" WHERE store_id = %1
+SELECT SUM(salary) FROM "delivery" WHERE store_id = %
+SELECT COUNT(*) FROM "delivery
+SELECT * FROM "delivery" WHERE EXISTS (SELECT FROM "delivery" WHERE status = $1 AND store_id = $2) AND store_id = $2
+SELECT * FROM "delivery" WHERE salary > ANY (SELECT salary FROM staff)
+
+SELECT * FROM items WHERE user_list_id = $1
+INSERT INTO items (quantity, user_list_id, component_id, name) VALUES ($1, $2, $3, $4 )
+DELETE FROM items WHERE id = $1
+UPDATE items SET quantity = $1 WHERE id = $2
+
+INSERT INTO "lists" (name, note, circuit) VALUES ($1, $2, $3) RETURNING id
+INSERT INTO "users_lists" (name, note, list_id, user_id) VALUES ($1,$2,$3,$4)
+DELETE FROM items WHERE user_list_id = $1
+DELETE FROM "users_lists" WHERE id = $1 RETURNING list_id
+DELETE FROM lists WHERE id = $1
+UPDATE "users_lists" SET name = $1, note = $2 WHERE id = $3 RETURNING list_id
+UPDATE "lists" SET name = $1, note = $2 WHERE id = $3
+SELECT * FROM users_lists WHERE id = $1
+SELECT id FROM lists WHERE circuit = $1
+SELECT * FROM users_lists WHERE list_id = $1
+SELECT * FROM lists WHERE circuit = $2 AND name LIKE $1
+INSERT INTO "lists" (name,note) VALUES ($1,$2) RETURNING id
+INSERT INTO "users_lists" (user_id, list_id, name, note) VALUES ($1,$2,$3,$4) RETURNING id
+DELETE FROM items WHERE user_list_id = $1
+DELETE FROM "users_lists" WHERE id = $1 RETURNING list_id
+DELETE FROM lists WHERE id = $1
+UPDATE "users_lists" SET name = $1, note = $2 WHERE id = $3 RETURNING list_id
+UPDATE "lists" SET name = $1, note = $2 WHERE id = $3
+SELECT * FROM users_lists WHERE id = $1
+SELECT id FROM lists WHERE circuit = $1
+SELECT * FROM users_lists WHERE list_id = $1
+SELECT * FROM lists WHERE circuit = $2 AND name LIKE $1
+INSERT INTO "lists" (name,note) VALUES ($1,$2) RETURNING id
+INSERT INTO "users_lists" (user_id, list_id, name, note) VALUES ($1,$2,$3,$4) RETURNING id
+DELETE FROM items WHERE user_list_id = $1
+UPDATE users_lists SET name = $1, note = $2 WHERE id = $3
+DELETE FROM items WHERE user_list_id = $1
+DELETE FROM "users_lists" WHERE id = $1
+SELECT * FROM users_lists WHERE user_id = $1
+SELECT * FROM users_lists WHERE user_id = $1 AND name LIKE $2
+UPDATE users_lists SET fav = CASE WHEN fav = $1 THEN $2 ELSE $1 END WHERE id = $3 RETURNING fav
+SELECT * FROM users_lists WHERE id = $1
+SELECT * FROM items WHERE user_list_id = $1
+INSERT INTO users_lists (name, note, user_id) VALUES ($1,$2,$3) RETURNING id
+INSERT INTO items (quantity, user_list_id, component_id) VALUES ($1,$2,$3)
+
+SELECT * FROM "phones" WHERE store_id = $1
+DELETE FROM "phones" WHERE id = $1
+INSERT INTO "phones" (number,store_id) VALUES($1,$2)
+
+INSERT INTO "roles" (rolename) VALUES ($1)
+SELECT * FROM "roles" WHERE roleid= $1
+SELECT * FROM "roles" WHERE roleid $1
+SELECT * FROM "roles
+DELETE FROM "roles" WHERE roleid = $1
+
+SELECT * FROM "staff" WHERE id = $1
+DELETE FROM "staff" WHERE id = $1
+INSERT INTO "staff" (name,age,salary,store_id) VALUES($1,$2)
+SELECT * FROM "staff" WHERE store_id = %1
+SELECT count(*) FROM "staff" WHERE store_id = %1
+SELECT * FROM staff WHERE salary > ALL (SELECT salary FROM delivery)
+
+SELECT * FROM "stores
+SELECT * FROM "stores" WHERE id = $1
+DELETE FROM "stores" WHERE id = $1
+INSERT INTO "stores" (name,location,img_url) VALUES($1,$2,$3)
+UPDATE "stores" SET (name,location,img_url) VALUES($1,$2,$3) WHERE id = $4
+DELETE FROM "stores
+SELECT AVG(t.salary) AS average_salary FROM (SELECT delivery.salary FROM delivery WHERE store_id = $1 UNION ALL SELECT staff.salary FROM staff WHERE store_id = $1 ) t
+SELECT MAX(t.SALARY) as max_salary FROM (SELECT delivery.salary FROM delivery WHERE store_id = $1 UNION ALL SELECT staff.salary FROM staff WHERE store_id = $1) t
+SELECT MIN(t.SALARY) as min_salary FROM (SELECT delivery.salary FROM delivery WHERE store_id = $1 UNION ALL SELECT staff.salary FROM staff WHERE store_id = $1) t
+
+INSERT INTO "users" (email,password,username,roleid) VALUES ($1,$2,$3,$4)
+SELECT * FROM "users" WHERE username = $1
+SELECT * FROM "users" WHERE email = $1
+SELECT * FROM "users" WHERE userid = $1
+SELECT * FROM "users" WHERE email = $1
+SELECT * FROM "users"
+DELETE FROM "users" WHERE userid = $1

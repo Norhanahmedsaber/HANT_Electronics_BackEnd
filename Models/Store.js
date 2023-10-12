@@ -34,7 +34,18 @@ const Update = async (store, id) => {
     [store.name, store.location, store.img_url, id]
   );
 };
-
+const getStoreAverageSalary = async(store_id) => {
+  const {rows} = await pool.query('SELECT AVG(t.salary) AS average_salary FROM (SELECT delivery.salary FROM delivery WHERE store_id = $1 UNION ALL SELECT staff.salary FROM staff WHERE store_id = $1 ) t', [store_id]);
+  return rows
+}
+const getStoreHighestSalary = async (store_id) => {
+  const {rows} = await pool.query('SELECT MAX(t.SALARY) as max_salary FROM (SELECT delivery.salary FROM delivery WHERE store_id = $1 UNION ALL SELECT staff.salary FROM staff WHERE store_id = $1) t',[store_id]);
+  return rows;
+}
+const getStoreLowestSalary = async (store_id) => {
+  const {rows} = await pool.query('SELECT MIN(t.SALARY) as min_salary FROM (SELECT delivery.salary FROM delivery WHERE store_id = $1 UNION ALL SELECT staff.salary FROM staff WHERE store_id = $1) t',[store_id]);
+  return rows;
+}
 module.exports = {
   Get,
   GetAll,
@@ -42,4 +53,7 @@ module.exports = {
   Delete,
   DeleteAll,
   Update,
+  getStoreAverageSalary,
+  getStoreHighestSalary,
+  getStoreLowestSalary
 };

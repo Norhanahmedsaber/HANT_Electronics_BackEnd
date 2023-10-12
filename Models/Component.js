@@ -20,12 +20,12 @@ const getByID = async (id) => {
   return component;
 };
 const getAll = async () => {
-  const { rows } = await pool.query('SELECT * FROM "components"');
+  const { rows } = await pool.query('SELECT * FROM "components" ORDER BY name');
   return rows;
 };
 const search = async (search) => {
   const { rows } = await pool.query(
-    "SELECT * FROM components WHERE name LIKE $1",
+    "SELECT * FROM components WHERE name LIKE $1 ORDER BY name",
     ["%" + search + "%"]
   );
   console.log(rows);
@@ -33,7 +33,7 @@ const search = async (search) => {
 };
 const getByCatId = async (catid) => {
   const { rows } = await pool.query(
-    'SELECT * FROM "components" WHERE catid = $1',
+    'SELECT * FROM "components" WHERE catid = $1 ORDER BY name',
     [catid]
   );
   return rows;
@@ -46,7 +46,7 @@ const deleteAll = async () => {
 };
 const update = async (component, id) => {
   await pool.query(
-    "UPDATE components SET (name,description,catid) VALUES ($1,$2,$3) WHERE id = $4",
+    "UPDATE components SET name = $1 , description = $2, catid = $3 WHERE id = $4",
     [component.name, component.name, component.description, component.catid, id]
   );
 };
