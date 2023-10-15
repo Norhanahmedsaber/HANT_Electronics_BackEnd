@@ -9,6 +9,7 @@ const categoryRouter = require("../Routers/categories")
 const itemRouter = require("../Routers/Item")
 const app = express();
 const port = process.env.PORT || 3000;
+const cors = require('cors')
 app.use(express.json());
 
 app.use(userRouter);
@@ -19,7 +20,7 @@ app.use(storesRouter);
 app.use(categoryRouter)
 app.use(roleRouter)
 app.use(itemRouter)
-
+app.use(cors())
 
 app.post("/scrap",async(req,res)=>{
   const search = req.body.search
